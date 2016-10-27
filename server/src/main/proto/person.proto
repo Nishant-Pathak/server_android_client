@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.nishant.person";
+option java_outer_classname = "PersonProto";
+option objc_class_prefix = "HLW";
+
+package person;
+
+// The greeting service definition.
+service PersonService {
+    // add a person
+    rpc addPerson (PPerson) returns (PPerson) {}
+    rpc getPerson (PPerson) returns (PPersonList) {}
+    rpc getAllPerson (Empty) returns (PPersonList) {}
+}
+
+message Empty {
+}
+
+message PPerson {
+    int64 id = 1;
+    string first_name = 2;
+    string last_name = 3;
+}
+
+message PPersonList {
+    repeated PPerson pperson = 1;
+}

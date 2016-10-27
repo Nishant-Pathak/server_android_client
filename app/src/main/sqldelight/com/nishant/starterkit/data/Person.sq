@@ -1,0 +1,22 @@
+
+CREATE TABLE person (
+ _id INTEGER NOT NULL PRIMARY KEY,
+ first_name TEXT NOT NULL,
+ last_name TEXT NOT NULL
+);
+
+-- Further SQL statements are proceeded by an identifier. This will be used to name the constant
+-- in the generated Java code.
+select_by_first_name:
+SELECT *
+FROM person
+WHERE first_name = ?;
+
+select_by_id:
+SELECT *
+FROM person
+WHERE _id = ?;
+
+select_all:
+SELECT *
+FROM person;
