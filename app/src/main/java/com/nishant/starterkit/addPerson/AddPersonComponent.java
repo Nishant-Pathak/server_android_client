@@ -8,5 +8,5 @@ import dagger.Component;
 @PerActivity
 @Component(modules = AddPersonModule.class, dependencies = ApplicationComponent.class)
 public interface AddPersonComponent {
-  public void inject(AddPersonActivity activity);
+  void inject(AddPersonActivity activity);
 }

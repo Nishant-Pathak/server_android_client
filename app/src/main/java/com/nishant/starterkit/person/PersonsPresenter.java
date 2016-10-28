@@ -8,6 +8,7 @@ import java.util.List;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class PersonsPresenter implements PersonsContract.Presenter {
 
@@ -25,6 +26,9 @@ public class PersonsPresenter implements PersonsContract.Presenter {
     personObservable
       .observeOn(AndroidSchedulers.mainThread())
       .subscribeOn(Schedulers.io())
+      .doOnError(throwable -> {
+        Timber.e(throwable);
+      })
       .subscribe(persons -> {
         if (mView != null) {
           mView.showPersons(persons);

@@ -9,6 +9,8 @@ import com.nishant.starterkit.R;
 import com.nishant.starterkit.SmartHomeService;
 import com.nishant.starterkit.injection.annotation.ApplicationContext;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -17,6 +19,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@Singleton
 @Module
 public class ApplicationModule {
   private final Application mApplication;

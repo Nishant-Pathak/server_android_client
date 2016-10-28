@@ -45,6 +45,8 @@ public class LocalDataSource implements DataSource {
     Observable<Person> personObservable = getPerson(person._id());
     Observable<Person> addPersonObservable = Observable.create(subscriber -> {
       bdb.insert(Person.TABLE_NAME, Person.FACTORY.marshal(person).asContentValues());
+      subscriber.onNext(person);
+      subscriber.onCompleted();
     });
 
     return Observable

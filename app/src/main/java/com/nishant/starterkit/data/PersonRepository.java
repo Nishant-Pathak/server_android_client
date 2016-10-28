@@ -72,6 +72,10 @@ public class PersonRepository implements DataSource {
 
   @Override
   public Observable<Person> addPerson(@NonNull Person person) {
-    return remoteDataSource.addPerson(person).doOnNext(localDataSource::addPerson);
+    return remoteDataSource.addPerson(person)
+      .doOnNext(savedOnServerPerson -> {
+        localDataSource.addPerson(savedOnServerPerson).subscribe();
+        cacheDataSource.addPerson(savedOnServerPerson).subscribe();
+      });
   }
 }

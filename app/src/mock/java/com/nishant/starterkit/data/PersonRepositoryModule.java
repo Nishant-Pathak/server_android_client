@@ -11,6 +11,8 @@ import com.nishant.starterkit.injection.annotation.Cache;
 import com.nishant.starterkit.injection.annotation.Local;
 import com.nishant.starterkit.injection.annotation.Remote;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -25,23 +27,27 @@ public class  PersonRepositoryModule {
   }
 
   @Provides
+  @Singleton
   PersonOpenHelper providePersonOpenHelper() {
     return new PersonOpenHelper(mApplication.getApplicationContext());
   }
 
   @Provides
+  @Singleton
   @Local
   DataSource providesLocalDataSource(PersonOpenHelper helper) {
     return new LocalDataSource(helper);
   }
 
   @Provides
+  @Singleton
   @Remote
   DataSource providesRemoteDataSource() {
     return new FakeRemoteDataSource();
   }
 
   @Provides
+  @Singleton
   @Cache
   DataSource providesCacheDataSource() {
     return new CacheDataSource();

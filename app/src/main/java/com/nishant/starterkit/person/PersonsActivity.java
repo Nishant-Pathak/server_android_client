@@ -49,7 +49,6 @@ public class PersonsActivity extends RxAppCompatActivity implements PersonsContr
 
     setContentView(R.layout.activity_persons);
 
-    mPersonsPresenter.attachView(this);
     ButterKnife.bind(this);
 
     mPersonAdapter = new PersonAdapter(new LinkedList<>());
@@ -61,11 +60,8 @@ public class PersonsActivity extends RxAppCompatActivity implements PersonsContr
     mPersonListView.setAdapter(mPersonAdapter);
 
     mSwipeRefreshLayout.setOnRefreshListener(() -> mPersonsPresenter.getPersons(true));
-  }
 
-  @Override
-  protected void onResume() {
-    super.onResume();
+    mPersonsPresenter.attachView(this);
   }
 
   @OnClick(R.id.add_person)

@@ -170,5 +170,7 @@ dependencies {
   compile "javax.annotation:javax.annotation-api:$rootProject.annotationApiVersion"
 
   compile 'com.android.support:recyclerview-v7:25.0.0'
+  compile 'com.facebook.stetho:stetho:1.4.1'
+
 
 }
