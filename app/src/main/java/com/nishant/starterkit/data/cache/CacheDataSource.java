@@ -12,6 +12,7 @@ import java.util.List;
 import javax.inject.Singleton;
 
 import rx.Observable;
+import rx.subjects.BehaviorSubject;
 
 @Singleton
 public class CacheDataSource implements DataSource {
@@ -28,11 +29,18 @@ public class CacheDataSource implements DataSource {
     for(int i = 0; i <personsCache.size(); i++) {
       personList.add(personsCache.get(i));
     }
-    return Observable.just(personList);
+    return Observable.create(subscriber -> {
+      subscriber.onNext(personList);
+      subscriber.onCompleted();
+    });
   }
 
   @Override
   public Observable<Person> addPerson(@NonNull Person person) {
-    return Observable.just(person).doOnNext(p -> personsCache.put(p._id(), p));
+    BehaviorSubject<Person> behaviorSubject = BehaviorSubject.create();
+    personsCache.put(person._id(), person);
+    behaviorSubject.onNext(person);
+    behaviorSubject.onCompleted();
+    return behaviorSubject;
   }
 }

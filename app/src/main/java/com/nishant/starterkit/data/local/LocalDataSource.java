@@ -14,6 +14,7 @@ import javax.inject.Singleton;
 
 import rx.Observable;
 import rx.schedulers.Schedulers;
+import rx.subjects.BehaviorSubject;
 
 @Singleton
 public class LocalDataSource implements DataSource {
@@ -42,16 +43,14 @@ public class LocalDataSource implements DataSource {
 
   @Override
   public Observable<Person> addPerson(@NonNull Person person) {
-    Observable<Person> personObservable = getPerson(person._id());
-    Observable<Person> addPersonObservable = Observable.create(subscriber -> {
+    BehaviorSubject<Person> subject = BehaviorSubject.create();
+    try {
       bdb.insert(Person.TABLE_NAME, Person.FACTORY.marshal(person).asContentValues());
-      subscriber.onNext(person);
-      subscriber.onCompleted();
-    });
-
-    return Observable
-      .concat(personObservable, addPersonObservable)
-      .filter(person1 -> person1 != null)
-      .first();
+      subject.onNext(person);
+    } catch (Exception ex) {
+      subject.onError(ex);
+    }
+    subject.onCompleted();
+    return subject;
   }
 }

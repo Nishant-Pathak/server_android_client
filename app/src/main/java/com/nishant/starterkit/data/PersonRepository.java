@@ -35,10 +35,17 @@ public class PersonRepository implements DataSource {
   @Override
   public Observable<Person> getPerson(@NonNull Long personId) {
     Observable<Person> cacheObservable = cacheDataSource.getPerson(personId);
-    Observable<Person> localObservable = localDataSource.getPerson(personId);
+    Observable<Person> localObservable =
+      localDataSource
+        .getPerson(personId)
+        .doOnNext(cacheDataSource::addPerson);
+
     Observable<Person> remoteObservable =
       remoteDataSource.getPerson(personId)
-        .doOnNext(localDataSource::addPerson);
+        .doOnNext(p -> {
+          localDataSource.addPerson(p);
+          cacheDataSource.addPerson(p);
+        });
 
     return Observable.concat(
       cacheObservable,
@@ -50,19 +57,21 @@ public class PersonRepository implements DataSource {
 
   @Override
   public Observable<List<Person>> getPersons(boolean forced) {
+    Observable<List<Person>> cacheObservable = cacheDataSource.getPersons(forced);
     Observable<List<Person>> localObservable = localDataSource.getPersons(forced);
+
     Observable<List<Person>> remoteObservable =
       remoteDataSource.getPersons(forced)
         .doOnNext(persons -> {
           for(Person person: persons) {
             localDataSource.addPerson(person);
+            cacheDataSource.addPerson(person);
           }
         });
     if (forced) {
       return remoteObservable;
     }
 
-    Observable<List<Person>> cacheObservable = cacheDataSource.getPersons(false);
     return Observable.concat(
       cacheObservable,
       localObservable,
@@ -72,10 +81,13 @@ public class PersonRepository implements DataSource {
 
   @Override
   public Observable<Person> addPerson(@NonNull Person person) {
-    return remoteDataSource.addPerson(person)
-      .doOnNext(savedOnServerPerson -> {
-        localDataSource.addPerson(savedOnServerPerson).subscribe();
-        cacheDataSource.addPerson(savedOnServerPerson).subscribe();
-      });
+    // on success addition to server, update local db and mem cache
+    return
+      remoteDataSource
+        .addPerson(person)
+        .doOnNext(p -> {
+          localDataSource.addPerson(p);
+          cacheDataSource.addPerson(p);
+        });
   }
 }

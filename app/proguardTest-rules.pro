@@ -23,3 +23,5 @@
 
 -keep class io.grpc.internal.DnsNameResolverProvider
 -keep class io.grpc.okhttp.OkHttpChannelProvider
+
+-keep class com.nishant.starterkit.data.local.LocalDataSource

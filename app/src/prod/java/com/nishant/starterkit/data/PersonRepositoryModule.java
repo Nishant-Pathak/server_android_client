@@ -11,10 +11,13 @@ import com.nishant.starterkit.injection.annotation.Cache;
 import com.nishant.starterkit.injection.annotation.Local;
 import com.nishant.starterkit.injection.annotation.Remote;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
 @Module
+@Singleton
 public class  PersonRepositoryModule {
 
   @NonNull

@@ -38,7 +38,7 @@ public class RemoteDataSource implements DataSource {
 
   @Override
   public Observable<Person> getPerson(@NonNull Long personId) {
-    return Observable.create(subscriber -> {
+    Observable<Person> observable = Observable.create(subscriber -> {
       PPerson pPerson = PPerson.newBuilder().setId(personId).build();
       try {
         PPersonList reply = mBlockingStub.getPerson(pPerson);
@@ -53,6 +53,8 @@ public class RemoteDataSource implements DataSource {
       }
       subscriber.onCompleted();
     });
+
+    return observable;
   }
 
   private Person transform(PPerson pPerson) {
