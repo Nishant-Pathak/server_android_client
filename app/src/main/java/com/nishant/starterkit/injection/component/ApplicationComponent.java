@@ -4,12 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.nishant.starterkit.SmartHomeService;
 import com.nishant.starterkit.data.PersonRepository;
 import com.nishant.starterkit.data.PersonRepositoryModule;
 import com.nishant.starterkit.injection.annotation.ApplicationContext;
 import com.nishant.starterkit.injection.module.ApplicationModule;
-import com.nishant.starterkit.injection.module.NetworkModule;
 
 import javax.inject.Singleton;
 
@@ -19,8 +17,7 @@ import dagger.Component;
 @Component(
   modules = {
     ApplicationModule.class,
-    PersonRepositoryModule.class,
-    NetworkModule.class
+    PersonRepositoryModule.class
   }
 )
 public interface ApplicationComponent {
@@ -29,8 +26,6 @@ public interface ApplicationComponent {
   Application application();
 
   PersonRepository personRepository();
-
-  SmartHomeService smartHomeService();
 
   SharedPreferences sharedPreferences();
 }

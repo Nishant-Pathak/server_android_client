@@ -6,18 +6,21 @@
               android:weightSum="3">
     <TextView
         android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="1"
         android:id="@+id/id"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <TextView
         android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="nishant"
         android:id="@+id/first_name"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <TextView
         android:textAppearance="?android:attr/textAppearanceListItem"
+        android:text="pathak"
         android:id="@+id/last_name"
         android:layout_weight="1"
         android:layout_width="match_parent"

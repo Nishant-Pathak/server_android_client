@@ -22,8 +22,8 @@ public class StarterApplication extends Application {
     super.onCreate();
     if (BuildConfig.DEBUG) {
       Timber.plant(new Timber.DebugTree());
+      Stetho.initializeWithDefaults(this);
     }
-    Stetho.initializeWithDefaults(this);
     Fabric.with(this, new Crashlytics());
   }
 

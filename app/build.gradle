@@ -33,8 +33,8 @@ android {
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
       testProguardFiles getDefaultProguardFile("proguard-android.txt"), "proguardTest-rules.pro"
 
-      buildConfigField "String", "API_HOST", '"http://103.6.157.14"'
-      buildConfigField "Integer", "API_PORT", "8080"
+      buildConfigField "String", "API_HOST", '"192.168.43.213"'
+      buildConfigField "Integer", "API_PORT", "50051"
     }
     release {
       minifyEnabled true
@@ -42,8 +42,8 @@ android {
       proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
       testProguardFiles getDefaultProguardFile("proguard-android.txt"), "proguardTest-rules.pro"
 
-      buildConfigField "String", "API_HOST", '"http://103.6.157.14"'
-      buildConfigField "Integer", "API_PORT", "8080"
+      buildConfigField "String", "API_HOST", '"192.168.43.213"'
+      buildConfigField "Integer", "API_PORT", "50051"
     }
   }
 
