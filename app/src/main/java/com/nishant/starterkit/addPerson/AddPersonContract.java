@@ -10,5 +10,7 @@ public class AddPersonContract {
 
   interface View extends BaseView {
     void onSuccessfullyAdded();
+
+    void failedToAdd(String message);
   }
 }

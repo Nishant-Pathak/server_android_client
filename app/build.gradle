@@ -2,7 +2,8 @@ apply plugin: "com.android.application"
 apply plugin: "com.neenbedankt.android-apt"
 apply plugin: "me.tatarka.retrolambda"
 apply plugin: "com.squareup.sqldelight"
-apply plugin: "io.fabric"
+// uncomment once added fabric key
+// apply plugin: "io.fabric"
 apply plugin: "com.google.protobuf"
 
 repositories {
@@ -160,7 +161,7 @@ dependencies {
   androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 
   testCompile "junit:junit:$rootProject.junitVersion"
-  testCompile "org.mockito:mockito-all:$rootProject.mockitoVersion"
+  testCompile "org.mockito:mockito-core:$rootProject.mockitoVersion"
 
   compile "com.google.guava:guava:$rootProject.guavaVersion"
   compile "com.squareup.okhttp:okhttp:$rootProject.okhttpVersion"

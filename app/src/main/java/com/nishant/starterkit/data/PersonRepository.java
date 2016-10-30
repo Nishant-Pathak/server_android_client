@@ -12,6 +12,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import rx.Observable;
+import timber.log.Timber;
 
 public class PersonRepository implements DataSource {
 
@@ -41,10 +42,14 @@ public class PersonRepository implements DataSource {
         .doOnNext(cacheDataSource::addPerson);
 
     Observable<Person> remoteObservable =
-      remoteDataSource.getPerson(personId)
+      remoteDataSource
+        .getPerson(personId)
         .doOnNext(p -> {
           localDataSource.addPerson(p);
           cacheDataSource.addPerson(p);
+        })
+        .doOnError(throwable -> {
+
         });
 
     return Observable.concat(

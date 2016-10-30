@@ -63,7 +63,7 @@ ext {
   rxlifecycleAndroidVersion = '0.8.0'
   retrofitVersion = '2.1.0'
   loggingInterceptorVersion = '3.3.1'
-  mockitoVersion = '1.10.19'
+  mockitoVersion = '2.2.9'
   protobufVersion = '3.0.0'
   grpcJavaVersion = '1.0.0'
   guavaVersion = '18.0'

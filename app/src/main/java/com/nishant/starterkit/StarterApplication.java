@@ -24,7 +24,7 @@ public class StarterApplication extends Application {
       Timber.plant(new Timber.DebugTree());
       Stetho.initializeWithDefaults(this);
     }
-    Fabric.with(this, new Crashlytics());
+    // Fabric.with(this, new Crashlytics());
   }
 
   public static StarterApplication get(Context context) {

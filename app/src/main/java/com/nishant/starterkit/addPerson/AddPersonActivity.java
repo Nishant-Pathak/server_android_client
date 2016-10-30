@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nishant.starterkit.R;
 import com.nishant.starterkit.StarterApplication;
@@ -76,5 +77,10 @@ public class AddPersonActivity extends AppCompatActivity implements AddPersonCon
   public void onSuccessfullyAdded() {
     setResult(RESULT_OK);
     finish();
+  }
+
+  @Override
+  public void failedToAdd(String message) {
+    Toast.makeText(this, "failed to load: " + message, Toast.LENGTH_SHORT).show();
   }
 }

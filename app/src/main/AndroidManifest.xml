@@ -24,7 +24,6 @@
         <activity android:name=".addPerson.AddPersonActivity"/>
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="d7560e409988197bfc6c0c0ad3d0d7859e60b15e"/>
+            android:value="REPLACE_WITH_FABRIC_KEY"/>
     </application>
-
 </manifest>

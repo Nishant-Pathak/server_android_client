@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.nishant.starterkit.R;
 import com.nishant.starterkit.StarterApplication;
 import com.nishant.starterkit.addPerson.AddPersonActivity;
 import com.nishant.starterkit.data.model.Person;
+import com.nishant.starterkit.injection.annotation.PerActivity;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.util.LinkedList;
@@ -94,6 +97,12 @@ public class PersonsActivity extends RxAppCompatActivity implements PersonsContr
   @Override
   public void showPersons(List<Person> persons) {
     mPersonAdapter.replaceData(persons);
+    mSwipeRefreshLayout.setRefreshing(false);
+  }
+
+  @Override
+  public void showError(String message) {
+    Toast.makeText(this, "failed to load: " + message, Toast.LENGTH_SHORT).show();
     mSwipeRefreshLayout.setRefreshing(false);
   }
 }

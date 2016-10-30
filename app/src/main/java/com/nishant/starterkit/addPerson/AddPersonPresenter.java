@@ -8,7 +8,6 @@ import com.nishant.starterkit.data.model.Person;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class AddPersonPresenter implements AddPersonContract.Presenter {
 
@@ -22,34 +21,19 @@ public class AddPersonPresenter implements AddPersonContract.Presenter {
 
   @Override
   public void savePerson(@NonNull String firstName, @NonNull String lastName) {
-    Observable<Person> personObservable = mPersonRepository.addPerson(new Person() {
-      @Override
-      public long _id() {
-        return 0;
-      }
-
-      @NonNull
-      @Override
-      public String first_name() {
-        return firstName;
-      }
-
-      @NonNull
-      @Override
-      public String last_name() {
-        return lastName;
-      }
-    });
+    Observable<Person> personObservable =
+      mPersonRepository.addPerson(Person.FACTORY.creator.create(0, firstName, lastName));
 
     personObservable
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
-      .doOnError(throwable -> {
-        Timber.e(throwable);
-      })
       .subscribe(person -> {
         if(mView != null) {
           mView.onSuccessfullyAdded();
+        }
+      }, throwable -> {
+        if(mView != null) {
+          mView.failedToAdd(throwable.getMessage());
         }
       });
   }

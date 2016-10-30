@@ -13,6 +13,7 @@ import java.util.List;
 import javax.inject.Singleton;
 
 import rx.Observable;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
 
@@ -38,7 +39,7 @@ public class LocalDataSource implements DataSource {
   public Observable<List<Person>> getPersons(boolean forced) {
     QueryObservable queryObservable =
       bdb.createQuery(Person.TABLE_NAME, Person.SELECT_ALL);
-    return queryObservable.mapToList(Person.ID_MAPPER::map);
+    return queryObservable.mapToList(Person.ID_MAPPER::map).take(1);
   }
 
   @Override

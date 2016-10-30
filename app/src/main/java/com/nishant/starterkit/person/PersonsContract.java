@@ -13,5 +13,7 @@ public class PersonsContract {
 
   interface View extends BaseView {
     void showPersons(List<Person> persons);
+
+    void showError(String message);
   }
 }
