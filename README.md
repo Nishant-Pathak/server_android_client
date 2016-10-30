@@ -1,5 +1,3 @@
-# Android App for Smart Home Solution.
-
 Design Pattern Used MVP:
 ![mvp.png](https://bitbucket.org/repo/XqbgGp/images/2049872573-mvp.png)
 Image source: [android-architecture](https://github.com/googlesamples/android-architecture)
